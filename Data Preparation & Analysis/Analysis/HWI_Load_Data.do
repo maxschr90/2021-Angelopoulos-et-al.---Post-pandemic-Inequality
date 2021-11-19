@@ -1,12 +1,18 @@
-/*****************************************************************************************
-* GENERATE THE PANEL USED FOR FURTHER ANALYSIS											 *
-*****************************************************************************************/
+************************************************************************************************************************
+************************************************************************************************************************
+******************************* LOAD DATA ******************************************************************************
+************************************************************************************************************************
+************************************************************************************************************************
+*** This .do file loads and merges the different UnSoc waves************************************************************ 
+*** Please make sure that you have donwloaded the dataset and set the paths to the relevant folders on your machine. ***
+*** For more details please see the documentation.**********************************************************************
+************************************************************************************************************************
+
 clear 
 cls
 
-// assign global macro to refer to Understanding Society data on your drive
+// Assign global macro to refer to Understanding Society data on your drive
 global ukhls "D:\OneDrive - University of Glasgow\COVID 19 Project\HWI_WP\Data\Understanding Society (Waves 1-9)\UKDA-6614-stata\stata\stata11_se"
-*cd "$ukhls"
 // add the path where you will save the data
 global data "D:\Documents\GitHub\HWI_Replication_File\Data Preparation & Analysis\Data"
 

@@ -1,20 +1,25 @@
-/*****************************************************************************************
-* CREATE THE DATA USED FOR THE HEALTH SHOCK RESPONSE GRAPH								 *
-*****************************************************************************************/
+************************************************************************************************************************
+************************************************************************************************************************
+******************************* SHOCKRESPONSE **************************************************************************
+************************************************************************************************************************
+************************************************************************************************************************
+************************************************************************************************************************
+*** This .do file collects the data required to assemble the health response to a severe health event.******************
+************************************************************************************************************************
 
-** preserve data
+** Preserve data
 preserve
 xtset pidp wave
 
-** standardize health to period before shock
+** Standardize health to period before shock
 egen Z= mean(HH_PCS) if  f1.HH_healthshock ==1 & HH_posthealthshock==0 
 carryforward Z, replace
 replace HH_PCS=HH_PCS/Z
 
-** generate empty matrix
+** Generate empty matrix
 mat health =J(7,3,.)
 
-** calculate mean and confidence interval
+** Calculate mean and confidence interval
 sum HH_PCS if  f1.HH_healthshock ==1 & HH_posthealthshock==0 
 mat health[1,1] = r(mean)
 mat health[1,2] = r(mean)-1.96*r(sd)/(r(N)^0.5)
@@ -59,7 +64,9 @@ putexcel A1=matrix(health),
 ** restore original data
 restore, preserve
 
-** repeat after health mincerian
+************************************************************************************************************************
+
+** Repeat after health mincerian
 xtset pidp wave
 gen log_hhsize =log(hhsize)
 
