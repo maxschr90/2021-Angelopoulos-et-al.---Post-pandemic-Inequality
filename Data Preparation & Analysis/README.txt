@@ -15,5 +15,6 @@ Before running the code, please not the following:
 	   In case of encountering an error, while running the code, please check if the error is caused by a missing package.
 	   To resolve the issue, install the required package.
 
-	3. Please ensure that all paths are specified correctly and point to the correct folders on your drive.
-	   There is a dedicated section at the beginning of each do-file for this purpose. 
+	3. The code is designed with the presented folder structure in mind. It will run smoothest if the same structure is retained.
+	   Further, please ensure that all paths are specified correctly and point to the correct folders on your drive.
+	   In some cases there is a dedicated section at the beginning of the do-file for this purpose. 
