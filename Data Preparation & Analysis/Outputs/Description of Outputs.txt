@@ -1,0 +1,7 @@
+This folder contains 4 xlsx files.
+
+	1. Data_Moments.xlsx contains the means and variances of the health measure. Out of these the conditional means
+	   of healthy, sick and recovering households and the overall variance provide the targets for our calibration.
+	2. ExogenousProcesses.xlsx contains the exogenous processes that enter the calibration of the model.
+	3. Healthshockresponse.xlsx contains the responses to a severe health event which are used to construct the figures in appendix D.
+	4. Tables.xlsx contains the information to construct tables 1, 2 and part of 4 in the main text and table 2A in the appendix.
