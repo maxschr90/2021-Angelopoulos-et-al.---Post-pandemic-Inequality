@@ -31,7 +31,6 @@ fprintf('Solve Problem with Aggregate Uncertainty \n')
 tic
 [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStationaryProblem_Agg(parms, r, wages, Transition_Agg, grid_parms, [cap_C,cap_R1]);
 fprintf('Dynamic Problem has Completed in: %.5f seconds. \n',toc')
-save('Path_Baseline_v1.mat')
 
 h_choice(:,:,5) = h_choice_stat;
 k_choice(:,:,5) = k_choice_stat;
@@ -61,11 +60,10 @@ for nn=1:50
     OMEGA = [];
     fprintf('Statistics have been calculated in: %.5f seconds. \n',toc')
 
-save('Path_Baseline_v1.mat')
+save('..\Outputs\Path_Baseline_v1.mat')
 
 end
 
-save('Path_Baseline_v1.mat')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% END OF MAIN CODE %%
