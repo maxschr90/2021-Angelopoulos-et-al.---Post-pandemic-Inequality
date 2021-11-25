@@ -1,6 +1,4 @@
-
-
-%% FUNCTION XV - Calcualate Concentration Indices %%  
+%% Calcualate Concentration Indices %%  
     
 function [CI, GCI, E, W] = concentrationindex(h,x,w,lim)
     %% This function calculates a number of concentration indices, based on Erregyers (2009) & Wagstaff et al. (1997)
@@ -35,16 +33,4 @@ function [CI, GCI, E, W] = concentrationindex(h,x,w,lim)
     %% Wagstaff Index
     W = (lim(2)-lim(1))/((lim(2)-m)*(m-lim(1)))*GCI;
     
-end
-
-function [Error] = findcap(C,D,cap,drop)
-
-    %% rescale Distribution
-    D = D/sum(D);
-    Mean_C = C'*D;
-    
-    %% impose cap
-    C(C>cap) = cap;
-    Error = (C'*D - drop*Mean_C);
-
 end

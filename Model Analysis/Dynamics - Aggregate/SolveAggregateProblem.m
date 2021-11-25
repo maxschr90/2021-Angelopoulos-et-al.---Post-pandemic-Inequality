@@ -1,13 +1,11 @@
+%% Solve Problem with Aggregate Uncertainty %%
 
-
-%% FUNCTION XI - Solve Problem with Aggregate Uncertainty %%
-
-function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStationaryProblem_Agg(parms, r, wages, Transition, grid_parms, cap)
+function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveAggregateProblem(parms, r, wages, Transition, grid_parms, cap)
 
     %% Algorithm Control
         Convergence_Criterion = 10^-8; % for VF Convergence
-        orderpoly = 7; %Degree of polynominal for VF approximation (up to 3 (not recommended))
-        n_groups =3;
+        orderpoly = 7; % Degree of polynominal for VF
+        n_groups = 3;
     %% PARAMETERS
         chi = parms.chi;
         theta_h= parms.theta_h;
@@ -16,13 +14,13 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStat
         mu = parms.mu; % CRRA Coefficient
         beta = parms.beta; % Discount Rate
         
-    %% Human Calpital Parameters
+    %% Health Parameters
         veta_h = repmat([ones(4*n_groups,1)*tau(1);ones(4*n_groups,1)*tau(2);ones(4*n_groups,1)*tau(3)],4,1);
         B_h = repmat(repmat(repelem(chi,1,n_groups),1,3),1,4);
     %% Building Grids for Endogenous Variables
-        b_lim = parms.blim;
+        b_lim = parms.blim; 
         nkap = grid_parms.nkap;
-        kap = grid_parms.kap; % Capital 
+        kap = grid_parms.kap;  
         nh = grid_parms.nh;
         h = grid_parms.h;    
         indexsize = nh*nkap; % Total Number of Gridpoints
@@ -31,8 +29,9 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStat
         hx = repmat(repelem(1:size(h,2),1,nkap),1);
         exog = size(Transition,1); % Number of idiosyncratic productivity states x health states
         wages = [wages(1,:), wages(2,:), wages(3,:), wages(4,:)];
-        cap = [ones(1,exog/4)*cap(1),ones(1,exog/4)*cap(2),ones(1,exog/4)*Inf,ones(1,exog/4)*Inf];
-      %% Preallocation
+        cap = [ones(1,exog/4)*cap(1),ones(1,exog/4)*cap(2),ones(1,exog/4)*Inf,ones(1,exog/4)*Inf]; % set consumption limit
+        
+   %% Preallocation
         TV = zeros(indexsize, exog);
    
 %% VALUE FUNCTION ITERATION
@@ -46,7 +45,6 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStat
         k_policy = ones(indexsize,exog)*min(kap);
         h_choice = repmat(h(hx)',1,exog);
         k_choice = k_policy;
-
         
     %% Get Coefficients for VF Approximation    
        b = interpV(Value_Function,h(hx),kap(kapx),orderpoly);
@@ -108,7 +106,7 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice] = SolveStat
 
  
             end
-%%% reshape everything
+%% reshape everything before output
     b = reshape(b,size(b,1),[],4);
     Value_Function = reshape(Value_Function,size(Value_Function,1),[],4);
     h_choice = reshape(h_choice,size(h_choice,1),[],4);

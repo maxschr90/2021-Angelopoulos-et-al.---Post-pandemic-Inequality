@@ -1,7 +1,5 @@
-
-
-%% FUNCTION III - Generate Exogenous Transition Matrices %%
-
+%% Generate Exogenous Transition Matrices %%
+%% This function constructs the big aggregate exogenous state transition matrices
 function [Transitions, Transition_Agg] = GenerateTransitionMatrices(Normal_Transition_Pre, Normal_Transition_Post, Normal_Health_Trans, Shock_Transition_Pre, Shock_Transition_Post, Shock_Health_Trans, PandemicTransition)
 
     Stat_Transition_combined = repmat([Normal_Transition_Pre, Normal_Transition_Post,Normal_Transition_Post],3,1);%% Normal Transitions

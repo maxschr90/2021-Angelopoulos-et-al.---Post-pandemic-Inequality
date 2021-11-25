@@ -1,7 +1,6 @@
-
-%% FUNCTION XII - Calculate Summary Statistics %% 
-
-function [Share_Healthstatus, Share_Class, Share_HTM, Mean_K, Mean_H, Mean_C, Mean_E, Mean_Y, Mean_I,  GINI_H, GINI_K, Mean_H_Class, Mean_K_Class, Mean_C_Class,GINI_H_Class, GINI_K_Class, GINI_C_Class,  Share_HTM_Class, Wagstaffindex_K, Erregyersindex_K, Share_vulnerable_K, Share_vulnerable_C,Quintile_Share,Mean_K_Quint,Mean_H_Quint,Mean_C_Quint] = SummaryStatistics(OMEGA, h_choice_agg, k_choice_agg, i_choice_agg, c_choice_agg, wages_agg, r, aa, nn,worldstate)
+%% Calculate Summary Statistics %% 
+%% This function calculates a number of statistics 
+function [Share_Healthstatus, Share_Class, Share_HTM, Mean_K, Mean_H, Mean_C, Mean_E, Mean_Y, Mean_I,  GINI_H, GINI_K, Mean_H_Class, Mean_K_Class, Mean_C_Class, GINI_H_Class, GINI_K_Class, GINI_C_Class,  Share_HTM_Class, Wagstaffindex_K, Erregyersindex_K, Share_vulnerable_K, Share_vulnerable_C, Quintile_Share, Mean_K_Quint, Mean_H_Quint, Mean_C_Quint] = SummaryStatistics(OMEGA, h_choice_agg, k_choice_agg, i_choice_agg, c_choice_agg, wages_agg, r, aa, nn, worldstate)
 
         [T] = size(OMEGA,2);
         r = [r(1), r(37), r(73) , r(110), 0.0056];
@@ -59,7 +58,6 @@ function [Share_Healthstatus, Share_Class, Share_HTM, Mean_K, Mean_H, Mean_C, Me
             for n = 1:4
                 
                 Share_HTM_Class(n,t) = sum(OMEGA(class==n,t).*(k_choice(class==n,t)<10^-6))/ sum(OMEGA(class==n,t));
-
                 Mean_H_Class(n,t) = h_choice(class==n,t)'*OMEGA(class==n,t)/sum(OMEGA(class==n,t));
                 Mean_K_Class(n,t) = k_choice(class==n,t)'*OMEGA(class==n,t)/sum(OMEGA(class==n,t));
                 Mean_C_Class(n,t) = c_choice(class==n,t)'*OMEGA(class==n,t)/sum(OMEGA(class==n,t));
@@ -70,12 +68,11 @@ function [Share_Healthstatus, Share_Class, Share_HTM, Mean_K, Mean_H, Mean_C, Me
 
             end
             for q = 1:5
-                
+           
                 Mean_H_Quint(q,t) = h_choice(quints(:,t)==q,t)'*OMEGA(quints(:,t)==q,t)/sum(OMEGA(quints(:,t)==q,t));
                 Mean_K_Quint(q,t) = k_choice(quints(:,t)==q,t)'*OMEGA(quints(:,t)==q,t)/sum(OMEGA(quints(:,t)==q,t));
                 Mean_C_Quint(q,t) = c_choice(quints(:,t)==q,t)'*OMEGA(quints(:,t)==q,t)/sum(OMEGA(quints(:,t)==q,t));
                                 
-
            end
 
         end

@@ -1,7 +1,5 @@
-
-
-%% FUNCTION XIII - Solve the HH Problem %%
-    
+%% Solve the HH Problem %%
+%% This Function Solves the Bellman Equation with Interpolation outside the Grid
 function [BC,h_choice,i_choice, k_choice, c_choice, y, util, TV] = VFI_Interpolation_Grid(wage, r, blim, h_t, k_t,i_tt, k_tt, B_h, veta_h, theta_h,  mu, phi, beta, Transition,  b, orderpoly, cap, riskpremium)
     %% Calculate availabe resources
     if k_t<0

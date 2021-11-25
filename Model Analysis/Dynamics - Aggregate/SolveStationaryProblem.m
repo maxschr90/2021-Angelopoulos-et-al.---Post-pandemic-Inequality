@@ -1,13 +1,11 @@
-
-
-%% FUNCTION X - Solve Stationary Problem %%
+%% Solve Stationary Problem %%
 
 function [b, Value_Function, h_choice, i_choice, k_choice, c_choice, grid_parms, initdist] = SolveStationaryProblem(parms, r, wages, Transition)
 
     %% Algorithm Control
         Convergence_Criterion = 10^-8; % for VF Convergence
-        orderpoly = 7; %Degree of polynominal for VF approximation (up to 3 (not recommended))
-        n_groups =3;
+        orderpoly = 7; % Degree of polynominal for VF approximation
+        n_groups = 3;
     %% PARAMETERS
         chi = parms.chi;
         theta_h= parms.theta_h;
@@ -16,7 +14,7 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice, grid_parms,
         mu = parms.mu; % CRRA Coefficient
         beta = parms.beta; % Discount Rate
 
-    %% Human Calpital Parameters
+    %% HealthParameters
         veta_h = [ones(4*n_groups,1)*tau(1);ones(4*n_groups,1)*tau(2);ones(4*n_groups,1)*tau(3)];
         B_h = repmat(repelem(chi,1,n_groups),1,3);
     %% Building Grids for Endogenous Variables
@@ -29,11 +27,10 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice, grid_parms,
    %% Add Grids together & Vectorize
         kapx = repmat(1:size(kap,2),1, (indexsize/nkap));
         hx = repmat(repelem(1:size(h,2),1,nkap),1);
-        
         exog = size(Transition,1); % Number of idiosyncratic productivity states x health states
         grid_parms = struct('nkap', nkap, 'kap', kap, 'nh', nh, 'h',h, 'blim', b_lim);
         initdist = ones(nkap,nh,exog).*(1/(nkap*nh*exog));
-        cap = [ones(1,exog)*Inf];
+        cap = [ones(1,exog)*Inf]; % set consumption limit to never bind
 
     %% Preallocation
         TV = zeros(indexsize, exog);
@@ -110,9 +107,5 @@ function [b, Value_Function, h_choice, i_choice, k_choice, c_choice, grid_parms,
                 vfi_iter = vfi_iter+1; % increase counter
 
  
-            end
-
-       
-
-
+            end  
 end

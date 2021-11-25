@@ -1,5 +1,5 @@
 
-%% Function 3 - Interpolate VF Approximation
+%% Interpolate VF Approximation
 %% This function finds the coefficients of the Value Function Approximation by Regression
 
 function b = interpV(Value_Function, hx, kapx, n)
