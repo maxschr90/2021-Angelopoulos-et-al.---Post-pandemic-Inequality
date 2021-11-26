@@ -98,7 +98,7 @@ clear
 clc
 
 %% Load solution to aggregate problem
-load('../Outputs/Path_Baseline_v1.mat', 'aa','hh', 'Transitions','h_choice_stat', 'k_choice_stat','h_choice', 'k_choice','parms', 'grid_parms', 'worldstate','i_choice', 'c_choice', 'wages', 'r', 'exostates','ALPHA','N')
+load('../Outputs/Path_Baseline_v1.mat','aa','hh','Transitions','h_choice_stat', 'k_choice_stat','h_choice', 'k_choice', 'grid_parms','parms', 'worldstate','i_choice','i_choice_stat', 'c_choice', 'c_choice_stat', 'wages', 'r', 'exostates','ALPHA','N', 'parms','Transition_Agg','b', 'b_stat','cap_C', 'cap_R1')
 
 %% Solve for decision rules with surprise shock
 [h_choice_surp, i_choice_surp, k_choice_surp, c_choice_surp] = SolveSurprise(parms, r, wages*.99, Transition_Agg, grid_parms, [cap_C,cap_R1], b);
@@ -107,7 +107,7 @@ h_choice(:,:,6:9) = h_choice_surp;
 k_choice(:,:,6:9) = k_choice_surp;
 c_choice(:,:,6:9) = c_choice_surp;
 i_choice(:,:,6:9) = i_choice_surp;
-wages(6:9,:) =wages(1:4,:)*.99;
+wages(6:9,:) = wages(1:4,:)*.99;
 
 worldstate(:,5)=worldstate(:,5)+5;
 
@@ -128,6 +128,11 @@ names = {'Path_Micro_surprise_prof.mat','Path_Micro_surprise_inter.mat','Path_Mi
 for i = 1:4
     simulateinitial_grp(ALPHA, Transitions, h_choice, k_choice, i_choice, c_choice, wages, r, aa, exostates, parms, grid_parms, worldstate, pct(i), names{i});
 end
+
+clear
+clc
+%% Compile data and save
+Load_Microsimulations_Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% END OF MAIN CODE %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
