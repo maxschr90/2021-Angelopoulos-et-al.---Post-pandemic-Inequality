@@ -1,3 +1,6 @@
+%% Healthshock Figures
+%% This code creates figures D1 & D2 in the appendix
+
 clear
 clc
 close all
@@ -19,7 +22,7 @@ h = figure(1);
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-exportgraphics(h,'..\Outputs\Shockresponse.eps','BackgroundColor','none')
+exportgraphics(h,'..\Outputs\Fig_App_D_1.eps','BackgroundColor','none')
 
 figure(2)
 ciplot(HealthshockresponseS1(:,3),HealthshockresponseS1(:,4),HealthshockresponseS1(:,1), [0.5, 0.5, 0.5])
@@ -33,7 +36,7 @@ h = figure(2);
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-exportgraphics(h,'..\Outputs\Shockresponse_HealthMincerian.eps','BackgroundColor','none')
+exportgraphics(h,'Outputs\Fig_App_D_2.eps','BackgroundColor','none')
 
 
 
