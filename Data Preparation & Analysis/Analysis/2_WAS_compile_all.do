@@ -378,7 +378,6 @@ keep pid hid* agew* Dage* W1W5_longwgtw* W1W4_longwgtw* W1W2_longwgtw* W2W3_long
 
 save "`location'\\\Data\WAS_all.dta", replace
 
-local location "C:\Users\spyro\OneDrive - University of Glasgow\Corona_project\WAS" 
 use "`location'\\\Data\WAS_all.dta", clear
 
 sort hid1  pno1 hid2  pno2 hid3  pno3 hid4  pno4 hid5  pno5
@@ -670,7 +669,7 @@ egen educ_s    = max(educ_s_aux), by(hid)
 ********************************************************************************************
 ********************************************************************************************
 ********************************************************************************************
-merge m:1 year using "`location'\\\Data\CPI.dta"
+merge m:1 year using "`location'\\\Data\CPI\CPI.dta"
 keep if _m==3
 drop _m
 
