@@ -48,34 +48,12 @@ drop if educ_cortd>= . //
 
 drop if empstat==4 //inactive students
 
-sum net_variable_income if wave == 5 [aw=sampl_weights], detail
-
-
 gen col_ind=0
 replace col_ind=1 if net_worth<3500
 
 qui sum col_ind if wave == 5 [aw=sampl_weights], detail
 gen pop_share5=r(mean)
 di pop_share5
-
-replace net_worth=5000000 if net_worth>5000000
-replace net_worth=-1000000 if net_worth<-1000000
-
-*twoway  histogram net_worth if nssec_six==4,color(blue) bin(100)  || histogram  net_worth if nssec_six==3,color(red) bin(100)|| histogram  net_worth if nssec_six==2,color(green) bin(100)  note("Source:  WAS")  legend(label(1 "Professionals") label(2 "Intermediate") label(3 "Routine"))
-
-*twoway  kdensity net_worth if nssec_six==4,color(blue)  || kdensity  net_worth if nssec_six==3,color(red) || kdensity  net_worth if nssec_six==2,color(green)  note("Source:  WAS")  legend(label(1 "Professionals") label(2 "Intermediate") label(3 "Routine"))
-
-
-	sumdist Net_Fin_Wealth if wave == 5  [aw = sampl_weights], ngp(5) qgp(ngg) 
-			local shareQ5   = r(sh5)
-			local shareQ4   = r(sh4)
-			local shareQ3   = r(sh3)
-			local shareQ2   = r(sh2)
-			local shareQ1   = r(sh1)
-			
-			tabstat Net_Fin_Wealth if wave == 5 [aw = sampl_weights],by(ngg) s(mean median)
-
-
 
 tab nssec_six 
 
