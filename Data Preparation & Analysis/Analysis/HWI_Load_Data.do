@@ -14,7 +14,7 @@ cls
 // Assign global macro to refer to Understanding Society data on your drive
 global ukhls "D:\OneDrive - University of Glasgow\COVID 19 Project\HWI_WP\Data\Understanding Society (Waves 1-9)\UKDA-6614-stata\stata\stata11_se"
 // add the path where you will save the data
-global data "D:\Documents\GitHub\HWI_Replication_File\Data Preparation & Analysis\Data"
+global data "D:\Documents\GitHub\2021-Angelopoulos-et-al. - Health-and-Wealth-Inequality\Data Preparation & Analysis\Data"
 
 //loop through each wave
 foreach w in a b c d e f g h i  { // For fewer waves use only the wave prefix of the waves you need to merge

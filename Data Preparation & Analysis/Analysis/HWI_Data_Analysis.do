@@ -61,6 +61,11 @@ drop if W   < pctl_W
 drop pcth_W pctl_W
 gen lw = log(HH_netincome)
 
+** Calculate concentration indices
+conindex HH_PCS , rank(HH_netincome) bounded lim(0.1,1) wag
+by YEAR, sort: conindex HH_PCS , rank(HH_netincome) bounded lim(0.1,1) wag
+
+
 ** Run Mincerian Regression & Predict Residuals
 reg lw i.HH_class i.sex c.age c.age_sq c.age_qu i.intdaty_dv i.gor_dv  c.log_hhsize 
 predict res ,r
