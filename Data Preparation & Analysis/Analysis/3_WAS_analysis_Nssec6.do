@@ -65,9 +65,9 @@ gen eq_net_worth=net_worth/hh_weights
 
 foreach sk in 1 2 3 4{
 	
-	qui sum net_worth if wave == 5 & net_worth<=0 & nssec_six==`sk' [aw=sampl_weights], detail
+	qui sum net_worth if wave == 3 & net_worth<=0 & nssec_six==`sk' [aw=sampl_weights], detail
     scalar Dpop_share`sk'=r(sum_w)
-	qui sum net_worth if wave == 5 & nssec_six==`sk' [aw=sampl_weights], detail
+	qui sum net_worth if wave == 3 & nssec_six==`sk' [aw=sampl_weights], detail
     scalar Tpop_share`sk'=r(sum_w)
 	gen indebted`sk'=Dpop_share`sk'/Tpop_share`sk'
 	}
