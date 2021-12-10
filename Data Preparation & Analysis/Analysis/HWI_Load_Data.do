@@ -12,6 +12,7 @@ clear
 cls
 
 // Assign global macro to refer to Understanding Society data on your drive
+// You will have to change this path to allow the program to load the data
 global ukhls "D:\OneDrive - University of Glasgow\COVID 19 Project\HWI_WP\Data\Understanding Society (Waves 1-9)\UKDA-6614-stata\stata\stata11_se"
 // add the path where you will save the data
 global data "D:\Documents\GitHub\2021-Angelopoulos-et-al. - Health-and-Wealth-Inequality\Data Preparation & Analysis\Data"
