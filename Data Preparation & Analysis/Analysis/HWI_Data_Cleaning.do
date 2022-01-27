@@ -97,6 +97,43 @@ bysort hidp: egen HH_healthshock = max(healthshock)
 replace HH_netincome = ((HH_netincome/CPI)*100)  
 replace HH_grossincome = ((HH_grossincome/CPI)*100)  
 
+** Health Investment Variables
+replace sportact =. if sportact<0
+replace sportsfreq =. if sportsfreq<0
+gen sportsfreq2 =.
+replace sportsfreq2 =0 if sportsfreq==7
+replace sportsfreq2 =1 if sportsfreq==6
+replace sportsfreq2 =2 if sportsfreq==5
+replace sportsfreq2 =3.5 if sportsfreq==4
+replace sportsfreq2 =12 if sportsfreq==3
+replace sportsfreq2 =104 if sportsfreq==2
+replace sportsfreq2 =260 if sportsfreq==1
+
+
+replace wkfruit =. if wkfruit<0
+replace wkfruit =7 if wkfruit==4
+replace wkfruit =5 if wkfruit==3
+replace wkfruit =2 if wkfruit==2
+replace wkfruit =0 if wkfruit==1
+
+replace wkvege =. if wkvege<0
+replace wkvege =7 if wkvege==4
+replace wkvege =5 if wkvege==3
+replace wkvege =2 if wkvege==2
+replace wkvege =0 if wkvege==1
+
+replace ctband_dv =. if ctband_dv<0
+
+pca  sportact wkfruit wkvege sportsfreq2 
+predict  healthinvestment_1 
+
+egen max_healthinvestment_1 = max(healthinvestment_1)
+egen min_healthinvestment_1 = min(healthinvestment_1)
+replace healthinvestment_1 = (healthinvestment_1-min_healthinvestment_1)/(max_healthinvestment_1-min_healthinvestment_1)
+bysort hidp: egen HH_healthinvestment_1 = mean(healthinvestment_1)
+
+
+
 ** keep only HH head in age range
 keep if pno == hrpno
 keep if inrange(age_dv,25,60)

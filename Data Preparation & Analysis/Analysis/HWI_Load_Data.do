@@ -54,19 +54,30 @@ foreach w in a b c d e f g h i  { // For fewer waves use only the wave prefix of
 		rename a_hconds08 a_hcondns8
 
 	}
+	else if `waveno' == 2 | `waveno' == 5   {
+	use  pidp `w'_sportsfreq `w'_smnow `w'_sportact `w'_wkvege `w'_wkfruit  `w'_preason `w'_ppno `w'_ppid `w'_jbhas `w'_hiqual_dv `w'_istrtdaty `w'_sppid `w'_intdaty_dv `w'_jbseg_dv `w'_jbnssec*_dv `w'_fimnmisc_dv `w'_fimnnet_dv `w'_fimnsben_dv `w'_fimnpen_dv `w'_fimninvnet_dv `w'_fimnprben_dv `w'_paygu_dv `w'_fimnlabnet_dv `w'_fimnlabgrs_dv `w'_fimngrs_dv `w'_jbstat `w'_jbsat `w'_pno `w'_sf1 `w'_paju `w'_maju `w'_health `w'_sex `w'_hcondn1 `w'_hcondn2 `w'_hcondn3 `w'_hcondn4 `w'_hcondn5  `w'_hcondn6 `w'_hcondn7  `w'_hcondn8  `w'_hcondn9  `w'_hcondn10  `w'_hcondn11  `w'_hcondn12 `w'_hcondn13 `w'_hcondn14 `w'_hcondn15 `w'_hcondn16 `w'_jboffy `w'_jbsemp `w'_jbhrs `w'_jbot `w'_paygu_dv `w'_paynu_dv `w'_basrate `w'_age_dv `w'_gor_dv `w'_hidp `w'_sf12pcs_dv `w'_jbsoc00_cc `w'_jbsemp `w'_racel `w'_qfhigh using "$ukhls/ukhls_w`waveno'/`w'_indresp", clear
+
+	merge n:1 `w'_hidp   using "$ukhls/ukhls_w`waveno'/`w'_hhresp"
+		}
+	else if `waveno' == 7 | `waveno' == 9   {
+	use  pidp  `w'_fruitamt `w'_vegeamt `w'_wkvege `w'_wkfruit   `w'_preason `w'_ppno `w'_ppid `w'_jbhas `w'_hiqual_dv `w'_istrtdaty `w'_sppid `w'_intdaty_dv `w'_jbseg_dv `w'_jbnssec*_dv `w'_fimnmisc_dv `w'_fimnnet_dv `w'_fimnsben_dv `w'_fimnpen_dv `w'_fimninvnet_dv `w'_fimnprben_dv `w'_paygu_dv `w'_fimnlabnet_dv `w'_fimnlabgrs_dv `w'_fimngrs_dv `w'_jbstat `w'_jbsat `w'_pno `w'_sf1 `w'_paju `w'_maju `w'_health `w'_sex `w'_hcondn1 `w'_hcondn2 `w'_hcondn3 `w'_hcondn4 `w'_hcondn5  `w'_hcondn6 `w'_hcondn7  `w'_hcondn8  `w'_hcondn9  `w'_hcondn10  `w'_hcondn11  `w'_hcondn12 `w'_hcondn13 `w'_hcondn14 `w'_hcondn15 `w'_hcondn16 `w'_jboffy `w'_jbsemp `w'_jbhrs `w'_jbot `w'_paygu_dv `w'_paynu_dv `w'_basrate `w'_age_dv `w'_gor_dv `w'_hidp `w'_sf12pcs_dv `w'_jbsoc00_cc `w'_jbsemp `w'_racel `w'_qfhigh using "$ukhls/ukhls_w`waveno'/`w'_indresp", clear
+
+	merge n:1 `w'_hidp   using "$ukhls/ukhls_w`waveno'/`w'_hhresp"
+		}		
 	else{
 	use  pidp `w'_preason `w'_ppno `w'_ppid `w'_jbhas `w'_hiqual_dv `w'_istrtdaty `w'_sppid `w'_intdaty_dv `w'_jbseg_dv `w'_jbnssec*_dv `w'_fimnmisc_dv `w'_fimnnet_dv `w'_fimnsben_dv `w'_fimnpen_dv `w'_fimninvnet_dv `w'_fimnprben_dv `w'_paygu_dv `w'_fimnlabnet_dv `w'_fimnlabgrs_dv `w'_fimngrs_dv `w'_jbstat `w'_jbsat `w'_pno `w'_sf1 `w'_paju `w'_maju `w'_health `w'_sex `w'_hcondn1 `w'_hcondn2 `w'_hcondn3 `w'_hcondn4 `w'_hcondn5  `w'_hcondn6 `w'_hcondn7  `w'_hcondn8  `w'_hcondn9  `w'_hcondn10  `w'_hcondn11  `w'_hcondn12 `w'_hcondn13 `w'_hcondn14 `w'_hcondn15 `w'_hcondn16 `w'_jboffy `w'_jbsemp `w'_jbhrs `w'_jbot `w'_paygu_dv `w'_paynu_dv `w'_basrate `w'_age_dv `w'_gor_dv `w'_hidp `w'_sf12pcs_dv `w'_jbsoc00_cc `w'_jbsemp `w'_racel `w'_qfhigh using "$ukhls/ukhls_w`waveno'/`w'_indresp", clear
 
 	merge n:1 `w'_hidp   using "$ukhls/ukhls_w`waveno'/`w'_hhresp"
-		}
+		}	
+		
+		
 	// drop the wave prefix from all variables
 	rename `w'_* *
 	
 	// create a wave variable
 	cap: gen wave=`waveno'
 	
-	// Create Individual Level Variables and aggregate to HH
-	//do CreateHHVars
+
 	// save one file for each wave
 	save temp`w', replace
 }

@@ -34,9 +34,23 @@ mat C_4_alt[5,1] = r(gini)
 tabstat HH_healthshock, by(HH_class) save
 tabstatmat C_5_alt
 
-mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_5_alt]
+egen I = mean(HH_healthinvestment_1)
+replace HH_healthinvestment_1=HH_healthinvestment_1/I
+
+tabstat HH_healthinvestment_1, by(HH_class) save
+tabstatmat C_6_alt
+
+qui: ineqdeco HH_healthinvestment_1, by(HH_class)
+mat C_7_alt =J(5,1,.)
+mat C_7_alt[1,1] = r(gini_1)
+mat C_7_alt[2,1] = r(gini_2)
+mat C_7_alt[3,1] = r(gini_3)
+mat C_7_alt[4,1] = r(gini_4)
+mat C_7_alt[5,1] = r(gini)
+
+mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_6_alt, C_7_alt, C_5_alt]
 mat rownames C_alt = Professionals Intermediate Routine Inactive Total
-mat colnames C_alt = "Relative Mean Net Income" "Relative Mean Health" "Gini Health" "Pct with severe health event" 
+mat colnames C_alt = "Relative Mean Net Income" "Relative Mean Health" "Gini Health" "Relative Mean Health Investment" "Gini Health Investment" "Pct with severe health event" 
 
 ** save outputs
 putexcel set   "..\Outputs\Tables.xlsx", sheet("Table 1") modify
@@ -70,6 +84,24 @@ mat C_4_alt[5,1] = r(gini)
 
 tabstat HH_healthshock, by(HH_class) save
 tabstatmat C_5_alt
+
+egen I = mean(HH_healthinvestment_1)
+replace HH_healthinvestment_1=HH_healthinvestment_1/I
+
+tabstat HH_healthinvestment_1, by(HH_class) save
+tabstatmat C_6_alt
+
+qui: ineqdeco HH_healthinvestment_1, by(HH_class)
+mat C_7_alt =J(5,1,.)
+mat C_7_alt[1,1] = r(gini_1)
+mat C_7_alt[2,1] = r(gini_2)
+mat C_7_alt[3,1] = r(gini_3)
+mat C_7_alt[4,1] = r(gini_4)
+mat C_7_alt[5,1] = r(gini)
+
+mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_6_alt, C_7_alt, C_5_alt]
+mat rownames C_alt = Professionals Intermediate Routine Inactive Total
+mat colnames C_alt = "Relative Mean Net Income" "Relative Mean Health" "Gini Health" "Relative Mean Health Investment" "Gini Health Investment" "Pct with severe health event" 
 
 mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_5_alt]
 mat rownames C_alt = Professionals Intermediate Routine Inactive Total
