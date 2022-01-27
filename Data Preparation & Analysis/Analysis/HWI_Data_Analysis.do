@@ -113,6 +113,15 @@ xttrans2 panelid if panelid[_n+1] !=. & HH_posthealthshock ==1, matcell(Trans_Po
 xttrans2 HH_class if HH_class[_n+1] !=. & HH_posthealthshock ==0 , matcell(Trans_Class_Pre) prob
 xttrans2 HH_class if HH_class[_n+1] !=. & HH_posthealthshock ==1, matcell(Trans_Class_Post) prob
 
+** Health - Income Relationship
+gen dy = d.lw*100
+gen dh = d.HH_PCS
+twoway (scatter dy dh)
+xtile dhq = dh, n(10)
+tabstat  dy , by(dhq) stat(mean sem N) save nototal
+tabstatmat health_income_1
+tabstat  dy if HH_class > l.HH_class, by(dhq) stat(mean sem N) save nototal
+tabstatmat health_income_2
 
 ** Save Outputs
 putexcel set   "..\Outputs\ExogenousProcesses.xlsx", sheet("Productivities") replace
@@ -135,3 +144,7 @@ putexcel set   "..\Outputs\Data_Moments.xlsx", sheet("Health Moments") modify
 putexcel A1=matrix(HealthMoments), names
 putexcel set   "..\Outputs\ExogenousProcesses.xlsx", sheet("Health Shock Probabilities") modify
 putexcel A1=matrix(HealthShocks), names
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Full Sample") replace
+putexcel A1=matrix(health_income_1)
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Negative Transition") modify
+putexcel A1=matrix(health_income_2)

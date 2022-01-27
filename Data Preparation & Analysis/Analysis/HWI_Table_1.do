@@ -103,10 +103,6 @@ mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_6_alt, C_7_alt, C_5_alt]
 mat rownames C_alt = Professionals Intermediate Routine Inactive Total
 mat colnames C_alt = "Relative Mean Net Income" "Relative Mean Health" "Gini Health" "Relative Mean Health Investment" "Gini Health Investment" "Pct with severe health event" 
 
-mat def C_alt = [C_1_alt, C_3_alt, C_4_alt, C_5_alt]
-mat rownames C_alt = Professionals Intermediate Routine Inactive Total
-mat colnames C_alt = "Relative Mean Net Income" "Relative Mean Health" "Gini Health" "Pct with severe health event" 
-
 ** save outputs
 putexcel set   "..\Outputs\Tables.xlsx", sheet("Appendix Table A2") modify
 putexcel A1=matrix(C_alt), names
