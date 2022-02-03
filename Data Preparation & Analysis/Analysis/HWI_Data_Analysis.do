@@ -114,14 +114,29 @@ xttrans2 HH_class if HH_class[_n+1] !=. & HH_posthealthshock ==0 , matcell(Trans
 xttrans2 HH_class if HH_class[_n+1] !=. & HH_posthealthshock ==1, matcell(Trans_Class_Post) prob
 
 ** Health - Income Relationship
+reg HH_PCS log_hhsize HH_postasthma HH_postarthritis  HH_postangina  HH_posthyperthyroidism HH_posthypothyroidism  HH_postlivercondition HH_postdiabetes HH_postepilepsy HH_posthighbloodpressure  HH_postdeadfather HH_postdeadmother  c.HH_age##c.HH_age##c.HH_age i.sex i.gor_dv   
+predict res_minc_all,r
+
+gen severe=0
+replace severe=1 if HH_posthealthshock==1
+bys pidp: egen indic=sum(severe)
+bys pidp: egen indich=sum(indic)
+drop if indich>0
+
 gen dy = d.lw*100
-gen dh = d.HH_PCS
-twoway (scatter dy dh)
+gen lh = log(HH_PCS)
+gen dh = d.lh*100
+*twoway (scatter dy dh)
 xtile dhq = dh, n(10)
+xtile phq = dh, n(100)
 tabstat  dy , by(dhq) stat(mean sem N) save nototal
 tabstatmat health_income_1
-tabstat  dy if HH_class > l.HH_class, by(dhq) stat(mean sem N) save nototal
+tabstat  dy , by(phq) stat(mean sem N) save nototal
 tabstatmat health_income_2
+tabstat  dh , by(phq) stat(mean sem N) save nototal
+tabstatmat health_income_3
+tabstat  dh res_minc_all, by(dhq) stat(mean sem N) save nototal
+tabstatmat health_income_4
 
 ** Save Outputs
 putexcel set   "..\Outputs\ExogenousProcesses.xlsx", sheet("Productivities") replace
@@ -144,7 +159,11 @@ putexcel set   "..\Outputs\Data_Moments.xlsx", sheet("Health Moments") modify
 putexcel A1=matrix(HealthMoments), names
 putexcel set   "..\Outputs\ExogenousProcesses.xlsx", sheet("Health Shock Probabilities") modify
 putexcel A1=matrix(HealthShocks), names
-putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Full Sample") replace
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Deciles") replace
 putexcel A1=matrix(health_income_1)
-putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Negative Transition") modify
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Percentiles") modify
 putexcel A1=matrix(health_income_2)
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Percentiles XAxis") modify
+putexcel A1=matrix(health_income_3)
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Deciles XAxis") modify
+putexcel A1=matrix(health_income_4)
