@@ -129,14 +129,19 @@ gen dh = d.lh*100
 *twoway (scatter dy dh)
 xtile dhq = dh, n(10)
 xtile phq = dh, n(100)
+xtile qhq = dh, n(20)
 tabstat  dy , by(dhq) stat(mean sem N) save nototal
 tabstatmat health_income_1
 tabstat  dy , by(phq) stat(mean sem N) save nototal
 tabstatmat health_income_2
 tabstat  dh , by(phq) stat(mean sem N) save nototal
 tabstatmat health_income_3
-tabstat  dh res_minc_all, by(dhq) stat(mean sem N) save nototal
+tabstat  dh , by(dhq) stat(mean sem N) save nototal
 tabstatmat health_income_4
+tabstat  dy , by(qhq) stat(mean sem N) save nototal
+tabstatmat health_income_5
+tabstat  dh , by(qhq) stat(mean sem N) save nototal
+tabstatmat health_income_6
 
 ** Save Outputs
 putexcel set   "..\Outputs\ExogenousProcesses.xlsx", sheet("Productivities") replace
@@ -167,3 +172,7 @@ putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Percentiles XAxi
 putexcel A1=matrix(health_income_3)
 putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Deciles XAxis") modify
 putexcel A1=matrix(health_income_4)
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Quintiles") modify
+putexcel A1=matrix(health_income_5)
+putexcel set   "..\Outputs\HealthIncomeHistogramm.xlsx", sheet("Quintiles XAxis") modify
+putexcel A1=matrix(health_income_6)
