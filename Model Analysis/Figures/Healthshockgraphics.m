@@ -1,7 +1,7 @@
 %% Healthshock Figures
 %% This code creates figures D1 & D2 in the appendix
 
-clear
+clear all
 clc
 close all
 

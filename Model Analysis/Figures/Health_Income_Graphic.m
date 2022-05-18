@@ -38,7 +38,7 @@ h = figure(1);
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-exportgraphics(h,'..\Outputs\Fig_1_temp.png','BackgroundColor','none')
+exportgraphics(h,'..\Outputs\Fig_1_temp.emf','BackgroundColor','none')
 exportgraphics(h,'..\Outputs\Fig_1_temp.pdf','BackgroundColor','none')
 
 BB=[Health_Impact_Income_Pctile_dh(:,1) Health_Impact_Income_Pctile(:,1:2)];
@@ -64,7 +64,7 @@ h = figure(2);
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-exportgraphics(h,'..\Outputs\Fig_1_temp2.png','BackgroundColor','none')
+exportgraphics(h,'..\Outputs\Fig_1_temp2.emf','BackgroundColor','none')
 exportgraphics(h,'..\Outputs\Fig_1_temp2.pdf','BackgroundColor','none')
 
 
@@ -91,7 +91,7 @@ h = figure(3);
 set(h,'Units','Inches');
 pos = get(h,'Position');
 set(h,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
-exportgraphics(h,'..\Outputs\Fig_1_temp3.png','BackgroundColor','none')
+exportgraphics(h,'..\Outputs\Fig_1_temp3.emf','BackgroundColor','none')
 exportgraphics(h,'..\Outputs\Fig_1_temp3.pdf','BackgroundColor','none')
 
 
