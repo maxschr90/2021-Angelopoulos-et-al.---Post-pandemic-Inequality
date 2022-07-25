@@ -117,13 +117,14 @@ A =[A(:,1),A]*100;
 hold on
 [ha,~,~] = shadedplot(1:size(A',1), prctile(A,10), prctile(A,90), [0.9 0.9 0.9],[0.9 0.9 0.9]); 
 hold on
-[hb,~,~] = shadedplot(1:size(A',1), prctile(A,25), prctile(A,75), [0.7 0.7 0.7],[0.7 0.7 0.7]); 
+[he,~,~] = shadedplot(1:size(A',1), prctile(A,25), prctile(A,75), [0.7 0.7 0.7],[0.7 0.7 0.7]); 
 hold on
 hc=plot(1:size(A',1), prctile(A,50),'linestyle', '-','color', '[0 0 0]','LineWidth',2); 
 hold on
 hd=plot(1:size(A',1),  (Share_HTM_bestcase),'linestyle', '--','color', 'red','LineWidth',2); 
-
 hold off
+
+legend([hc,hd,ha(2),he(2)],'Median','One-off pandemic','p10-p90','p25-p75')
 ylim([18.5 24]) 
 yticks([18:1:26]) 
 xlim([1 23])
